@@ -13,6 +13,8 @@
   -->
   <!--<includeDependencies package="." />-->
 
+  <include package=".viewlets" />
+
   <include package=".browser" />
 
   <include file="permissions.zcml" />

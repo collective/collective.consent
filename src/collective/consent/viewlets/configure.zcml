@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.consent">
+
+  -*- extra stuff goes here -*-
+
+  <browser:viewlet
+     name="check-consent-viewlet"
+     for="plone.app.contenttypes.interfaces.IDocument"
+     manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+     layer="collective.consent.interfaces.ICollectiveConsentLayer"
+     class=".check_consent_viewlet.CheckConsentViewlet"
+     template="check_consent_viewlet.pt"
+     permission="zope2.View"
+     />
+
+
+</configure>
