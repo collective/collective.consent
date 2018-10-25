@@ -1,0 +1,5 @@
+==================
+collective.consent
+==================
+
+User documentation
