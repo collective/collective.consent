@@ -7,6 +7,12 @@
   <!-- -*- extra stuff goes here -*- -->
 
     <permission
+        id="collective.consent.AddConsentItem"
+        title="collective.consent: Add ConsentItem"
+    />
+
+        
+    <permission
         id="collective.consent.AddConsentsContainer"
         title="collective.consent: Add ConsentsContainer"
     />

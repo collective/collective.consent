@@ -1,38 +1,30 @@
 <?xml version="1.0"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    name="Consents Container"
+    name="Consent Item"
     meta_type="Dexterity FTI"
     i18n:domain="collective.consent">
 
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">Consents Container</property>
+      name="title">Consent Item</property>
   <property
       i18n:translate=""
-      name="description">Container for Constent Item objects</property>
+      name="description">Provides consent informations and some settings for the consent.</property>
 
   <property name="allow_discussion">False</property>
-  <property name="factory">Consents Container</property>
+  <property name="factory">Consent Item</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
-  <property name="global_allow">True</property>
-  <property name="filter_content_types">True</property>
-  <property name="allowed_content_types">
-    <element value="Consent Item" />
-      <!--
-    <element value="Document" />
-    <element value="File" />
-  -->
-  </property>
+  <property name="global_allow">False</property>
   <!-- Schema, class and security -->
-  <property name="add_permission">collective.consent.AddConsentsContainer</property>
-  <property name="klass">collective.consent.content.consents_container.ConsentsContainer</property>
+  <property name="add_permission">collective.consent.AddConsentItem</property>
+  <property name="klass">collective.consent.content.consent_item.ConsentItem</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">collective.consent.content.consents_container.IConsentsContainer</property>
+  <property name="schema">collective.consent.content.consent_item.IConsentItem</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
@@ -54,7 +46,7 @@
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++add++Consents Container</property>
+  <property name="add_view_expr">string:${folder_url}/++add++Consent Item</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>
   <property name="immediate_view">view</property>
