@@ -2,12 +2,14 @@
 collective.consent
 ==================
 
-.. note:: THIS IS STILL IN PROGRESS!
+.. note::
+
+    THIS IS STILL IN PROGRESS!
 
 Provides a functionality to ask users for consent to different topics, before they can continue. One can add multiple consent items and define which user will have to give there consent based on there permission roles. Each of this users have to give the consent before they can continue to work.
 
 This is realized by viewlet which will check a list of consents for each user/consent_item combination and redirect the user to the consent item case they still have to give there consent.
-
+`Soup <https://pypi.org/project/souper/>`_
 Internally the consents are stored in a soup on the ConsentsContainer object.
 
 Features
