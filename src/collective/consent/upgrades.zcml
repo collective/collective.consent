@@ -3,14 +3,14 @@
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
   <!-- -*- extra stuff goes here -*- -->
-  <!--<genericsetup:upgradeStep
+  <genericsetup:upgradeStep
     source="*"
     destination="1001"
-    title="Reload GS profiles"
+    title="Reload GS profiles, to update FTI settings"
     description=""
     profile="collective.consent:default"
     handler=".upgrades.reload_gs_profile"
-    />-->
+    />
 
 
 </configure>

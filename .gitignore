@@ -37,3 +37,5 @@ report.html
 !.gitkeep
 !.travis.yml
 !src/collective
+/collective.consent.sublime-project
+/collective.consent.sublime-workspace
