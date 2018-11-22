@@ -11,8 +11,6 @@ from zope.component import queryUtility
 import unittest
 
 
-
-
 class ConsentItemIntegrationTest(unittest.TestCase):
 
     layer = COLLECTIVE_CONSENT_INTEGRATION_TESTING

@@ -1,38 +1,23 @@
-.. This README is meant for consumption by humans and pypi. Pypi can render rst files so please do not use Sphinx features.
-   If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
-   This text does not appear on pypi or github. It is a comment.
-
 ==================
 collective.consent
 ==================
 
-Tell me what your product does
+.. note:: THIS IS STILL IN PROGRESS!
+
+Provides a functionality to ask users for consent to different topics, before they can continue. One can add multiple consent items and define which user will have to give there consent based on there permission roles. Each of this users have to give the consent before they can continue to work.
+
+This is realized by viewlet which will check a list of consents for each user/consent_item combination and redirect the user to the consent item case they still have to give there consent.
+
+Internally the consents are stored in a soup on the ConsentsContainer object.
 
 Features
 --------
 
-- Can be bullet points
-
-
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
-
-Translations
-------------
-
-This product has been translated into
-
-- Klingon (thanks, K'Plai)
+- Allows you to add multiple consent items (documents).
+- A consent item consists of a Title, Description, RichText and a custom button text.
+- Also you can define an update period, where the user has to give the consent again.
+- For every consent item one can choose the target permissions roles.
+- One can reset (invalidate) all existing consents for a consent item.
 
 
 Installation
@@ -48,7 +33,12 @@ Install collective.consent by adding it to your buildout::
         collective.consent
 
 
-and then running ``bin/buildout``
+and then running ``bin/buildout``, start Plone and activate the add-on in the add-on's control panel. Then add a ConsentContainer on the top-level (portal-root).
+
+Contributors
+------------
+
+- Maik Derstappen (MrTango) - md@derio.de
 
 
 Contribute
@@ -56,14 +46,12 @@ Contribute
 
 - Issue Tracker: https://github.com/collective/collective.consent/issues
 - Source Code: https://github.com/collective/collective.consent
-- Documentation: https://docs.plone.org/foo/bar
 
 
 Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
 
 
 License

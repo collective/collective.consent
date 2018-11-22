@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from plone import api
+# from plone import api
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from repoze.catalog.query import And
