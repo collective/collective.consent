@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
+from collective.consent import log
 
 
 @implementer(INonInstallable)
@@ -13,9 +15,27 @@ class HiddenProfiles(object):
         ]
 
 
+def create_consents_container(context):
+    portal = api.portal.get()
+    portal_types = portal.portal_types
+    if 'consents' in portal.objectIds():
+        return
+    consents_id = portal_types.constructContent(
+        'Consents Container',
+        portal,
+        'consents',
+        title='Consents',
+    )
+    consents_container = portal[consents_id]
+    consents_container.reindexObject()
+    consents_url = consents_container.absolute_url()
+    log.info('Created Consents Containter at: {0}'.format(consents_url))
+
+
 def post_install(context):
     """Post install script"""
     # Do something at the end of the installation of this package.
+    create_consents_container(context)
 
 
 def uninstall(context):

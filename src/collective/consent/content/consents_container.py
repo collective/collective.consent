@@ -46,7 +46,7 @@ class ConsentsContainer(Container):
         """ Save a consent of a given user_id for the given consent item
         """
         record = Record()
-        record.attrs['consent_id'] = u'${0}:${1}'.format(
+        record.attrs['consent_id'] = u'{0}:{1}'.format(
             consent_item_uid,
             user_id,
         )
@@ -107,8 +107,8 @@ class ConsentsContainer(Container):
         # self.consents_soup.reindex(records=records)
 
     def make_consent_invalid(self, consent_item_uid, user_id):
-        """ Find the consent for a given consent_item_ui and user_id and
-            make set valid=False
+        """ Find the consent for a given consent_item_uid and user_id and
+            set valid=False
         """
         query = And(
             Eq('consent_item_uid', consent_item_uid),

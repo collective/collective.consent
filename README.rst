@@ -18,7 +18,7 @@ Features
 - Allows you to add multiple consent items (documents).
 - A consent item consists of a Title, Description, RichText and a custom button text.
 - Also you can define an update period, where the user has to give the consent again.
-- For every consent item one can choose the target permissions roles.
+- For every consent item one can choose the target permission roles.
 - One can reset (invalidate) all existing consents for a consent item.
 
 

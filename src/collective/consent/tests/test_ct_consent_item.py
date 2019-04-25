@@ -23,7 +23,7 @@ class ConsentItemIntegrationTest(unittest.TestCase):
         parent_id = portal_types.constructContent(
             'Consents Container',
             self.portal,
-            'consent_item',
+            'consents_container',
             title='Parent container',
         )
         self.parent = self.portal[parent_id]

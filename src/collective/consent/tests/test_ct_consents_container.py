@@ -44,6 +44,8 @@ class ConsentsContainerIntegrationTest(unittest.TestCase):
 
     def test_ct_consents_container_adding(self):
         setRoles(self.portal, TEST_USER_ID, ['Contributor'])
+        portal_types = self.portal.portal_types
+        portal_types['Consents Container'].global_allow = True
         obj = api.content.create(
             container=self.portal,
             type='Consents Container',
@@ -55,14 +57,6 @@ class ConsentsContainerIntegrationTest(unittest.TestCase):
             u'IConsentsContainer not provided by {0}!'.format(
                 obj.id,
             ),
-        )
-
-    def test_ct_consents_container_globally_addable(self):
-        setRoles(self.portal, TEST_USER_ID, ['Contributor'])
-        fti = queryUtility(IDexterityFTI, name='Consents Container')
-        self.assertTrue(
-            fti.global_allow,
-            u'{0} is not globally addable!'.format(fti.id)
         )
 
     def test_ct_consents_container_filter_content_type_true(self):

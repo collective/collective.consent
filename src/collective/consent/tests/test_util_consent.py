@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.consent.testing import COLLECTIVE_CONSENT_FUNCTIONAL_TESTING
+# from collective.consent.testing import COLLECTIVE_CONSENT_FUNCTIONAL_TESTING
 from collective.consent.testing import COLLECTIVE_CONSENT_INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
@@ -17,11 +17,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.app = self.layer['app']
         self.request = self.app.REQUEST
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.consents = api.content.create(
-            container=self.portal,
-            type='Consents Container',
-            id='consents',
-        )
+        self.consents = self.portal.consents
         self.consent1 = api.content.create(
             container=self.consents,
             type='Consent Item',
@@ -193,11 +189,11 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         results_list = [r for r in results]
         self.assertTrue(results_list)
 
-
-class ConsentUtilFunctionalTest(unittest.TestCase):
-
-    layer = COLLECTIVE_CONSENT_FUNCTIONAL_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+#
+# class ConsentUtilFunctionalTest(unittest.TestCase):
+#
+#     layer = COLLECTIVE_CONSENT_FUNCTIONAL_TESTING
+#
+#     def setUp(self):
+#         self.portal = self.layer['portal']
+#         setRoles(self.portal, TEST_USER_ID, ['Manager'])
