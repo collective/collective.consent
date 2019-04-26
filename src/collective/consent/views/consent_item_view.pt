@@ -5,14 +5,46 @@
       i18n:domain="collective.consent"
       metal:use-macro="context/main_template/macros/master">
 <body>
-    <metal:block fill-slot="content-core">
-      <div class="heading">
-        <li i18n:translate="">
-          Sample View
-        </li>
-      <span tal:content="view/msg">this gets replaced</span>
-      </div>
-    </metal:block>
+  <metal:content-core fill-slot="content-core">
 
+    <div class="newsImageContainer">
+        <img tal:condition="python:getattr(context, 'image', None)"
+              tal:attributes="src string:${context/absolute_url}/@@images/image/thumb" />
+    </div>
+
+    <div tal:condition="python: context.text"
+          tal:content="structure python: context.text.output" />
+
+    <span tal:condition="view/has_given_consent|nothing">Sie haben bereits zugestimmt.</span>
+
+    <form action="" tal:condition="not:view/has_given_consent|nothing">
+      <input type="hidden" name="consent_uid" tal:attributes="value context/UID" />
+      <input type="hidden" name="user_id" tal:attributes="value view/user_info/id" />
+      <input type="submit"
+        name="submit"
+        tal:attributes="value context/button_text"></input>
+    </form>
+
+    <fieldset tal:condition="view/user_info/edit_perm|nothing">
+    <legend>Metadata</legend>
+      <label tal:attributes="for string:form-widgets-${view/w/target_roles/__name__}"
+        tal:content="structure view/w/target_roles/label"></label>
+      <p tal:content="structure view/w/target_roles/render">
+          target roles
+      </p>
+
+      <label tal:attributes="for string:form-widgets-${view/w/consent_update_period/__name__}"
+        tal:content="structure view/w/consent_update_period/label"></label>
+      <p tal:content="structure view/w/consent_update_period/render">
+          consent_update_period
+      </p>
+
+      <label tal:attributes="for string:form-widgets-${view/w/button_text/__name__}"
+        tal:content="structure view/w/button_text/label"></label>
+      <p tal:content="structure view/w/button_text/render">
+          button_text
+      </p>
+    </fieldset>
+  </metal:content-core>
 <body>
 </html>

@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from collective.consent import log
-from collective.consent.content.consents_container import IConsentsContainer
+from collective.consent.utilities import get_consent_container
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
 
 
 class CheckConsentViewlet(ViewletBase):
     def check_has_given_consents(self, items):
+        consent_container = get_consent_container()
         user = api.user.get_current()
         user_id = user.id
         for item in items:
-            record = self.context.consents.get_consent(
+            record = consent_container.get_consent(
                 item.UID,
                 user_id,
                 valid_only=True,
@@ -20,7 +21,8 @@ class CheckConsentViewlet(ViewletBase):
                 return False, item
         return True, None
 
-    def get_consent_items(self, consent_container):
+    def get_consent_items(self):
+        consent_container = get_consent_container()
         consent_items = api.content.find(
             portal_type=u'Consent Item',
             context=consent_container,
@@ -28,12 +30,7 @@ class CheckConsentViewlet(ViewletBase):
         return consent_items
 
     def render(self):
-        results = api.content.find(object_provides=IConsentsContainer)
-        if not results:
-            log.warn('No Consent Container found!')
-            return
-        consent_container = results[0].getObject()
-        consent_items = self.get_consent_items(consent_container)
+        consent_items = self.get_consent_items()
         self.has_given_consents, item = self.check_has_given_consents(
             consent_items,
         )

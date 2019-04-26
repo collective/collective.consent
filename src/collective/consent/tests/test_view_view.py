@@ -31,13 +31,6 @@ class ViewsIntegrationTest(unittest.TestCase):
         #     'Sample View is not found in view'
         # )
 
-    def test_view_not_matching_interface(self):
-        with self.assertRaises(ComponentLookupError):
-            getMultiAdapter(
-                (self.portal['front-page'], self.portal.REQUEST),
-                name='view'
-            )
-
 
 class ViewsFunctionalTest(unittest.TestCase):
 
