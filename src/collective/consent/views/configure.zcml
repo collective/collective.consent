@@ -7,6 +7,14 @@
   -*- extra stuff goes here -*-
 
   <browser:page
+     name="consent-item-consents-view"
+     for="Products.CMFCore.interfaces.IFolderish"
+     class=".consent_item_consents_view.ConsentItemConsentsView"
+     template="consent_item_consents_view.pt"
+     permission="zope2.View"
+     />
+
+  <browser:page
      name="view"
      for="collective.consent.content.consent_item.IConsentItem"
      class=".consent_item_view.ConsentItemView"
