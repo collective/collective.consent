@@ -42,9 +42,15 @@ class ConsentsContainer(Container):
         user_id,
         user_email,
         user_fullname,
+        valid=True,
     ):
         """ Save a consent of a given user_id for the given consent item
         """
+        # make sure we don't have old entries for this consent_item_uid/user_id
+        self.delete_consent(
+            consent_item_uid,
+            user_id,
+        )
         record = Record()
         record.attrs['consent_id'] = u'{0}:{1}'.format(
             consent_item_uid,
@@ -54,7 +60,7 @@ class ConsentsContainer(Container):
         record.attrs['user_id'] = user_id
         record.attrs['email'] = user_email
         record.attrs['fullname'] = user_fullname
-        record.attrs['valid'] = True
+        record.attrs['valid'] = valid
         record.attrs['timestamp'] = datetime.now()
         rec_id = self.consents_soup.add(record)
         return rec_id
@@ -96,6 +102,17 @@ class ConsentsContainer(Container):
             pass
         return record
 
+    def delete_consent(self, consent_item_uid, user_id):
+        """ Delete a single consents for the given consent_item_uid/user_id.
+        """
+        query = And(
+            Eq('consent_item_uid', consent_item_uid),
+            Eq('user_id', user_id),
+        )
+        records = self.consents_soup.query(query)
+        for record in records:
+            del self.consents_soup[record]
+
     def delete_consents(self, consent_item_uid):
         """ Delete all consents for the given consent_item_uid.
             Useful for event handler when a consent item is deleted.
@@ -104,7 +121,20 @@ class ConsentsContainer(Container):
         records = self.consents_soup.query(query)
         for record in records:
             del self.consents_soup[record]
-        # self.consents_soup.reindex(records=records)
+
+    def make_consents_invalid(self, consent_item_uid):
+        """ Find the consents for a given consent_item_uid and
+            set valid=False
+        """
+        query = And(
+            Eq('consent_item_uid', consent_item_uid),
+        )
+        records = [r for r in self.consents_soup.query(query)]
+        if not records:
+            return
+        for record in records:
+            record.attrs['valid'] = False
+        self.consents_soup.reindex(records=records)
 
     def make_consent_invalid(self, consent_item_uid, user_id):
         """ Find the consent for a given consent_item_uid and user_id and

@@ -17,14 +17,24 @@ class ConsentItemView(DefaultView):
     # template = ViewPageTemplateFile('consent_item_view.pt')
 
     def __call__(self):
-        self.user_info = self.get_user_info()
+        submit_value = self.request.form.get('submit')
+        reset_value = self.request.form.get('reset')
         consent_uid = self.request.form.get('consent_uid')
-        if consent_uid:
-            user_id = self.request.form.get('user_id')
-            submit_value = self.request.form.get('submit')
+        user_id = self.request.form.get('user_id')
+        self.came_from = self.request.form.get('came_from')
+        if submit_value:
             self.save_consent(consent_uid, user_id, submit_value)
-        self.has_given_consent = self.check_has_given_consent()
+            return self.request.response.redirect(
+                self.came_from
+            )
+        if reset_value:
+            self.reset_consents(consent_uid)
+        print(self.has_given_consent)
         return super(ConsentItemView, self).__call__()
+
+    def reset_consents(self, consent_uid):
+        consent_container = get_consent_container()
+        consent_container.make_consents_invalid(consent_uid)
 
     def save_consent(self, consent_uid, user_id, submit_value):
         if user_id != self.user_info['id']:
@@ -41,7 +51,8 @@ class ConsentItemView(DefaultView):
             self.user_info['fullname'],
         )
 
-    def get_user_info(self):
+    @property
+    def user_info(self):
         user_info = dict()
         user = api.user.get_current()
         user_info['id'] = user.id
@@ -53,10 +64,15 @@ class ConsentItemView(DefaultView):
         )
         return user_info
 
-    def check_has_given_consent(self):
+    @property
+    def has_given_consent(self):
+        user_roles = api.user.get_roles()
+        if not len(self.context.target_roles & set(user_roles)):
+            log.info(u"target_roles doesn't match: {0}.".format(user_roles))
+            return True
         consent_container = get_consent_container()
         record = consent_container.get_consent(
-            self.context.UID,
+            self.context.UID(),
             self.user_info['id'],
             valid_only=True,
         )

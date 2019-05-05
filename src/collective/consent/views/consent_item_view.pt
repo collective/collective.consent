@@ -17,12 +17,17 @@
 
     <span tal:condition="view/has_given_consent|nothing">Sie haben bereits zugestimmt.</span>
 
-    <form action="" tal:condition="not:view/has_given_consent|nothing">
+    <form action="">
+      <input type="hidden" name="came_from" tal:attributes="value view/came_from" />
       <input type="hidden" name="consent_uid" tal:attributes="value context/UID" />
       <input type="hidden" name="user_id" tal:attributes="value view/user_info/id" />
       <input type="submit"
         name="submit"
-        tal:attributes="value context/button_text"></input>
+        tal:attributes="value context/button_text"
+        tal:condition="not:view/has_given_consent|nothing"></input>
+      <input type="submit"
+        value="reset all consents"
+        name="reset"></input>
     </form>
 
     <fieldset tal:condition="view/user_info/edit_perm|nothing">

@@ -5,14 +5,28 @@
       i18n:domain="collective.consent"
       metal:use-macro="context/main_template/macros/master">
 <body>
-    <metal:block fill-slot="content-core">
-      <div class="heading">
-        <li i18n:translate="">
-          Sample View
-        </li>
-      <span tal:content="view/msg">this gets replaced</span>
-      </div>
-    </metal:block>
-
+  <metal:block fill-slot="content-core">
+    <h2 i18n:translate="">List of user consents</h2>
+    <table>
+      <thead>
+        <tr>
+          <th i18n:translate="">consent id</th>
+          <th i18n:translate="">fullname</th>
+          <th i18n:translate="">email</th>
+          <th i18n:translate="">timestamp</th>
+          <th i18n:translate="">valid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr tal:repeat="consent view/consents">
+          <td tal:content="consent/consent_id"></td>
+          <td tal:content="consent/fullname"></td>
+          <td tal:content="consent/email"></td>
+          <td tal:content="consent/timestamp"></td>
+          <td tal:content="consent/valid"></td>
+        </tr>
+      </tbody>
+    </table>
+  </metal:block>
 <body>
 </html>

@@ -7,11 +7,22 @@ from plone.app.layout.viewlets import ViewletBase
 
 
 class CheckConsentViewlet(ViewletBase):
+    @property
+    def has_given_consent(self):
+        consent_container = get_consent_container()
+        user = api.user.get_current()
+        user_id = user.id
+        return consent_container.has_given_consent(user_id)
+
     def check_has_given_consents(self, items):
+        user_roles = api.user.get_roles()
         consent_container = get_consent_container()
         user = api.user.get_current()
         user_id = user.id
         for item in items:
+            if not len(item.getObject().target_roles & set(user_roles)):
+                log.info(u"target_roles doesn't match: {0}.".format(user_roles))
+                return True, None
             record = consent_container.get_consent(
                 item.UID,
                 user_id,
@@ -37,5 +48,8 @@ class CheckConsentViewlet(ViewletBase):
         if self.has_given_consents:
             return self.index()
         else:
-            log.info('No consent for {0}'.format(item.gtURL()))
-            return self.request.response.redirect(item.getURL())
+            came_from = self.request.HTTP_REFERER
+            log.info('No consent for {0}'.format(item.getURL()))
+            return self.request.response.redirect(
+                item.getURL() + u'?came_from=' + came_from
+            )

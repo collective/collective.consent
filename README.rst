@@ -18,8 +18,16 @@ Features
 - Allows you to add multiple consent items (documents).
 - A consent item consists of a Title, Description, RichText and a custom button text.
 - Also you can define an update period, where the user has to give the consent again.
-- For every consent item one can choose the target permission roles.
+- For every consent item one can choose the target permission roles and consent update period.
+- Users are only ask for consent on published consent items.
 - One can reset (invalidate) all existing consents for a consent item.
+
+
+ToDo
+----
+
+- Use consent_update_period and WF state in has_given_consent
+- Add a global list of consents, sorted per user (maybe)
 
 
 Installation
