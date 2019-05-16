@@ -46,16 +46,18 @@ Install collective.consent by adding it to your buildout::
 
 and then running ``bin/buildout``, start Plone and activate the add-on in the add-on's control panel. Then add a ConsentContainer on the top-level (portal-root).
 
+
+Thanks
+------
+
+Initial implementation by: Derico - https://derico.de
+Sponsored by https://www.uni-giessen.de
+
+
 Contributors
 ------------
 
 - Maik Derstappen (MrTango) - md@derio.de
-
-
-Sponsor
--------
-
-Initial work was sponsored by https://www.uni-giessen.de
 
 
 Contribute
