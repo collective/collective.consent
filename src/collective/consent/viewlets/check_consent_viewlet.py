@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from collective.consent import _
 from collective.consent import log
 from collective.consent.content.consent_item import IConsentItem
 from collective.consent.utilities import get_consent_container
@@ -28,17 +28,12 @@ class CheckConsentViewlet(ViewletBase):
             item_obj = item.getObject()
             expires = None
             if item_obj.consent_update_period:
-                expires = datetime.now() - timedelta(
-                    item_obj.consent_update_period,
-                )
+                expires = datetime.now() - timedelta(item_obj.consent_update_period)
             if not len(item_obj.target_roles & set(user_roles)):
                 log.info(u"target_roles doesn't match: {0}.".format(user_roles))
                 return True, None
             record = consent_container.get_consent(
-                item.UID,
-                user_id,
-                valid_only=True,
-                expires=expires,
+                item.UID, user_id, valid_only=True, expires=expires
             )
             if not record:
                 return False, item
@@ -47,24 +42,25 @@ class CheckConsentViewlet(ViewletBase):
     def get_consent_items(self):
         consent_container = get_consent_container()
         consent_items = api.content.find(
-            portal_type=u'Consent Item',
+            portal_type=u"Consent Item",
             context=consent_container,
-            review_state=['published'],
+            review_state=["published"],
         )
         return consent_items
 
     def render(self):
         consent_items = self.get_consent_items()
-        self.has_given_consents, item = self.check_has_given_consents(
-            consent_items,
-        )
+        self.has_given_consents, item = self.check_has_given_consents(consent_items)
         if self.has_given_consents:
-            return ''
+            return ""
         else:
             context_state = getMultiAdapter(
-                (self.context, self.request), name="plone_context_state",
+                (self.context, self.request), name="plone_context_state"
             )
             came_from = context_state.current_base_url()
-            log.info('No consent for {0}'.format(item.getURL()))
-            redirect_url = item.getURL() + u'?came_from=' + came_from
+            log.info("No consent for {0}".format(item.getURL()))
+            api.portal.show_message(
+                message=_("Please give your consent below!"), request=self.request
+            )
+            redirect_url = item.getURL() + u"?came_from=" + came_from
             return self.request.response.redirect(redirect_url)
