@@ -44,7 +44,6 @@ setup(
     install_requires=[
         # -*- Extra requirements: -*-
         'plone.app.dexterity',
-        'plone.app.contenttypes',
         'plone.api>=1.8.4',
         'Products.GenericSetup>=1.8.2',
         'setuptools',

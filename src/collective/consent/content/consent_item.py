@@ -4,11 +4,24 @@ from plone.dexterity.content import Item
 from plone.supermodel import model
 from zope import schema
 from zope.interface import implementer
+from plone.app import textfield
 
 
 class IConsentItem(model.Schema):
     """ Marker interface and Dexterity Python Schema for ConsentItem
     """
+    # Make sure to import: plone.app.textfield
+    text = textfield.RichText(
+        title=_(
+            u'Text',
+        ),
+        description=_(
+            u'The full text of the consent item.',
+        ),
+        default=u'',
+        required=False,
+        readonly=False,
+    )
 
     button_text = schema.TextLine(
         title=_(
