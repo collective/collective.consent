@@ -28,6 +28,7 @@ def create_consents_container(context):
     )
     consents_container = portal[consents_id]
     consents_container.reindexObject()
+    api.content.transition(obj=consents_container, transition='publish')
     consents_url = consents_container.absolute_url()
     log.info('Created Consents Containter at: {0}'.format(consents_url))
 

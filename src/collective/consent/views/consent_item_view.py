@@ -6,7 +6,8 @@ from collective.consent.utilities import get_consent_container
 from plone import api
 # from Products.Five.browser import BrowserView
 from plone.dexterity.browser.view import DefaultView
-
+from datetime import datetime
+from datetime import timedelta
 
 # from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -17,19 +18,17 @@ class ConsentItemView(DefaultView):
     # template = ViewPageTemplateFile('consent_item_view.pt')
 
     def __call__(self):
-        submit_value = self.request.form.get('submit')
-        reset_value = self.request.form.get('reset')
+        consent_button_text = self.request.form.get('consent_button_text')
+        submit = 'submit' in self.request.form
+        reset = 'reset_consents' in self.request.form
         consent_uid = self.request.form.get('consent_uid')
         user_id = self.request.form.get('user_id')
         self.came_from = self.request.form.get('came_from')
-        if submit_value:
-            self.save_consent(consent_uid, user_id, submit_value)
-            return self.request.response.redirect(
-                self.came_from
-            )
-        if reset_value:
+        if submit:
+            self.save_consent(consent_uid, user_id, consent_button_text)
+            return self.request.response.redirect(self.came_from)
+        if reset:
             self.reset_consents(consent_uid)
-        print(self.has_given_consent)
         return super(ConsentItemView, self).__call__()
 
     def reset_consents(self, consent_uid):
@@ -71,10 +70,16 @@ class ConsentItemView(DefaultView):
             log.info(u"target_roles doesn't match: {0}.".format(user_roles))
             return True
         consent_container = get_consent_container()
+        expires = None
+        if self.context.consent_update_period:
+            expires = datetime.now() - timedelta(
+                self.context.consent_update_period,
+            )
         record = consent_container.get_consent(
             self.context.UID(),
             self.user_info['id'],
             valid_only=True,
+            expires=expires,
         )
         if not record:
             return False

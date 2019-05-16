@@ -3,7 +3,8 @@
   xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="plone">
 
-  <subscriber for="zope.container.contained.ObjectRemovedEvent"
+  <subscriber for="collective.consent.content.consent_item.IConsentItem
+                   zope.container.contained.ObjectRemovedEvent"
     handler=".subscribers.delete_consents"
     />
 

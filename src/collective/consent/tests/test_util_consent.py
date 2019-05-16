@@ -4,6 +4,8 @@ from collective.consent.testing import COLLECTIVE_CONSENT_INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from datetime import datetime
+from datetime import timedelta
 
 import unittest
 
@@ -119,17 +121,13 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
             u'Jane Doe',
         )
         # get all consents for user_id:
-        results = self.consents.search_consents(
-            user_id=TEST_USER_ID,
-        )
+        results = self.consents.search_consents(user_id=TEST_USER_ID, )
         results_list = [r for r in results]
         self.assertTrue(list(results_list))
         self.assertTrue(len(list(results_list)) == 2)
 
     def test_no_results_in_search_consents(self):
-        results = self.consents.search_consents(
-            user_id=TEST_USER_ID,
-        )
+        results = self.consents.search_consents(user_id=TEST_USER_ID, )
         results_list = [r for r in results]
         self.assertTrue(len(results_list) == 0)
 
@@ -147,9 +145,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
             u'John Doe',
         )
         # get all consents for user_id:
-        results = self.consents.search_consents(
-            user_id=TEST_USER_ID,
-        )
+        results = self.consents.search_consents(user_id=TEST_USER_ID, )
         results_list = [r for r in results]
         self.assertTrue(results_list)
         self.assertTrue(len(results_list) == 2)
@@ -159,9 +155,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
             TEST_USER_ID,
         )
         # get valid and invalid consents:
-        results = self.consents.search_consents(
-            user_id=TEST_USER_ID,
-        )
+        results = self.consents.search_consents(user_id=TEST_USER_ID, )
         results_list = [r for r in results]
         self.assertTrue(results_list)
         self.assertTrue(len(results_list) == 2)
@@ -197,9 +191,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.assertTrue(results_list)
         self.assertTrue(len(results_list) == 2)
 
-        self.consents.make_consents_invalid(
-            self.consent1.UID(),
-        )
+        self.consents.make_consents_invalid(self.consent1.UID(), )
         # get valid and invalid consents:
         results = self.consents.search_consents(
             consent_item_uid=self.consent1.UID(),
@@ -258,6 +250,54 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         )
         results_list = [r for r in results]
         self.assertTrue(results_list)
+
+    def test_search_unexpired_consents(self):
+        today = datetime.today()
+        self.consent1.consent_update_period = 80
+        self.consent2.consent_update_period = 360
+        past1 = today + timedelta(-90)
+        self.consents.save_consent(
+            self.consent1.UID(),
+            TEST_USER_ID,
+            u'john@example.com',
+            u'John Doe',
+            timestamp=datetime(past1.year, past1.month, past1.day),
+        )
+        past2 = today + timedelta(-90)
+        self.consents.save_consent(
+            self.consent2.UID(),
+            TEST_USER_ID,
+            u'jane@example.com',
+            u'Jane Doe',
+            timestamp=datetime(past2.year, past2.month, past2.day),
+        )
+        # get all consents for user_id / consent_item_uid:
+        results = self.consents.search_consents(
+            consent_item_uid=self.consent2.UID(),
+            user_id=TEST_USER_ID,
+        )
+        results_list = [r for r in results]
+        self.assertTrue(list(results_list))
+        self.assertTrue(len(list(results_list)) == 1)
+
+        # get all consents for user_id / consent_item_uid not older than update period:
+        results = self.consents.search_consents(
+            consent_item_uid=self.consent1.UID(),
+            user_id=TEST_USER_ID,
+            expires=today + timedelta(-self.consent1.consent_update_period),
+        )
+        results_list = [r for r in results]
+        self.assertFalse(list(results_list))
+
+        # get all consents for user_id / consent_item_uid not older than update period:
+        results = self.consents.search_consents(
+            consent_item_uid=self.consent2.UID(),
+            user_id=TEST_USER_ID,
+            expires=today + timedelta(-self.consent2.consent_update_period),
+        )
+        results_list = [r for r in results]
+        self.assertTrue(list(results_list))
+        self.assertTrue(len(list(results_list)) == 1)
 
 #
 # class ConsentUtilFunctionalTest(unittest.TestCase):

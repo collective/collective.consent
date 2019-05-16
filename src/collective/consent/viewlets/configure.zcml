@@ -8,7 +8,7 @@
 
   <browser:viewlet
      name="check-consent-viewlet"
-     for="plone.app.contenttypes.interfaces.IDocument"
+     for="Products.CMFCore.interfaces._content.IContentish"
      manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
      layer="collective.consent.interfaces.ICollectiveConsentLayer"
      class=".check_consent_viewlet.CheckConsentViewlet"

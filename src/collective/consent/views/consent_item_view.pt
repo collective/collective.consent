@@ -20,14 +20,24 @@
     <form action="">
       <input type="hidden" name="came_from" tal:attributes="value view/came_from" />
       <input type="hidden" name="consent_uid" tal:attributes="value context/UID" />
+      <input type="hidden" name="consent_button_text" tal:attributes="value context/button_text" />
       <input type="hidden" name="user_id" tal:attributes="value view/user_info/id" />
-      <input type="submit"
+      <button type="submit"
         name="submit"
-        tal:attributes="value context/button_text"
-        tal:condition="not:view/has_given_consent|nothing"></input>
-      <input type="submit"
-        value="reset all consents"
-        name="reset"></input>
+        tal:content="context/button_text"
+        tal:attributes="formaction string:${context/absolute_url}"
+        tal:condition="not:view/has_given_consent|nothing"></button>
+      <metal:manage_consents tal:condition="view/user_info/edit_perm|nothing">
+        <button type="submit"
+          name="reset_consents"
+          name="reset">reset all consents</button>
+        <button type="submit"
+          name="consents_list"
+          tal:attributes="formaction string:${context/absolute_url}/consent-item-consents-view">manage given consents</button>
+        <button type="submit"
+          tal:attributes="formaction string:${context/absolute_url}/@@historyview"
+          name="history">show changes</button>
+      </metal:manage_consents>
     </form>
 
     <fieldset tal:condition="view/user_info/edit_perm|nothing">

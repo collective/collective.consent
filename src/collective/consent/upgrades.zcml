@@ -12,5 +12,14 @@
     handler=".upgrades.reload_gs_profile"
     />
 
+  <genericsetup:upgradeStep
+    source="1001"
+    destination="1002"
+    title="Reload GS profiles, enable versioning support"
+    description=""
+    profile="collective.consent:default"
+    handler=".upgrades.reload_gs_profile"
+    />
+
 
 </configure>

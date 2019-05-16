@@ -1,32 +1,44 @@
 # -*- coding: utf-8 -*-
 
 from collective.consent import log
+from collective.consent.content.consent_item import IConsentItem
 from collective.consent.utilities import get_consent_container
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
+from zope.component import getMultiAdapter
+from datetime import datetime
+from datetime import timedelta
 
 
 class CheckConsentViewlet(ViewletBase):
-    @property
-    def has_given_consent(self):
-        consent_container = get_consent_container()
-        user = api.user.get_current()
-        user_id = user.id
-        return consent_container.has_given_consent(user_id)
+    """
+    """
 
     def check_has_given_consents(self, items):
+        if IConsentItem.providedBy(self.context):
+            # Skip checks for ConsentItem it self ;)
+            return True, None
         user_roles = api.user.get_roles()
         consent_container = get_consent_container()
+        if not consent_container:
+            return True, None
         user = api.user.get_current()
         user_id = user.id
         for item in items:
-            if not len(item.getObject().target_roles & set(user_roles)):
+            item_obj = item.getObject()
+            expires = None
+            if item_obj.consent_update_period:
+                expires = datetime.now() - timedelta(
+                    item_obj.consent_update_period,
+                )
+            if not len(item_obj.target_roles & set(user_roles)):
                 log.info(u"target_roles doesn't match: {0}.".format(user_roles))
                 return True, None
             record = consent_container.get_consent(
                 item.UID,
                 user_id,
                 valid_only=True,
+                expires=expires,
             )
             if not record:
                 return False, item
@@ -37,6 +49,7 @@ class CheckConsentViewlet(ViewletBase):
         consent_items = api.content.find(
             portal_type=u'Consent Item',
             context=consent_container,
+            review_state=['published'],
         )
         return consent_items
 
@@ -46,10 +59,12 @@ class CheckConsentViewlet(ViewletBase):
             consent_items,
         )
         if self.has_given_consents:
-            return self.index()
+            return ''
         else:
-            came_from = self.request.HTTP_REFERER
-            log.info('No consent for {0}'.format(item.getURL()))
-            return self.request.response.redirect(
-                item.getURL() + u'?came_from=' + came_from
+            context_state = getMultiAdapter(
+                (self.context, self.request), name="plone_context_state"
             )
+            came_from = context_state.current_base_url()
+            log.info('No consent for {0}'.format(item.getURL()))
+            redirect_url = item.getURL() + u'?came_from=' + came_from
+            return self.request.response.redirect(redirect_url, )
