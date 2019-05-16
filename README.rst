@@ -2,22 +2,23 @@
 collective.consent
 ==================
 
-.. note::
+Provides a functionality to ask authenticated users for consent to different topics, before they can continue. One can add multiple consent items and define which user will have to give there consent based on there permission roles. Each of this users have to give the consent before they can continue to work.
 
-    THIS IS STILL IN PROGRESS!
+.. figure:: collective.consent-demo.gif
 
-Provides a functionality to ask users for consent to different topics, before they can continue. One can add multiple consent items and define which user will have to give there consent based on there permission roles. Each of this users have to give the consent before they can continue to work.
+   Demo
 
 This is realized by viewlet which will check a list of consents for each user/consent_item combination and redirect the user to the consent item case they still have to give there consent.
 `Soup <https://pypi.org/project/souper/>`_
-Internally the consents are stored in a soup on the ConsentsContainer object.
+Internally the consents are stored in a soup on the ConsentsContainer ('/consents') object.
+
 
 Features
 --------
 
 - Allows you to add multiple consent items (documents).
 - A consent item consists of a Title, Description, RichText and a custom button text.
-- Also you can define an update period, where the user has to give the consent again.
+- Also you can define an update period, when the user has to give the consent again.
 - For every consent item one can choose the target permission roles and consent update period.
 - Users are only ask for consent on published consent items.
 - One can reset (invalidate) all existing consents for a consent item.
@@ -26,8 +27,8 @@ Features
 ToDo
 ----
 
-- Use consent_update_period and WF state in has_given_consent
 - Add a global list of consents, sorted per user (maybe)
+- remove Anonymous from roles vocab, as we only support authenticated users
 
 
 Installation
@@ -49,6 +50,12 @@ Contributors
 ------------
 
 - Maik Derstappen (MrTango) - md@derio.de
+
+
+Sponsor
+-------
+
+Initial work was sponsored by https://www.uni-giessen.de
 
 
 Contribute
