@@ -16,7 +16,7 @@ msgstr ""
 
 #: collective/consent/content/consent_item.py:27
 msgid "Button Text"
-msgstr ""
+msgstr "Text für den Bestätigungsknopf"
 
 #: collective/consent/profiles/default/types/Consent_Item.xml
 msgid "Consent Item"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: collective/consent/content/consent_item.py:58
 msgid "Consent Update Period"
-msgstr ""
+msgstr "Consent Verfallsdatum"
 
 #: collective/consent/profiles/default/types/Consents_Container.xml
 msgid "Consents Container"
@@ -45,11 +45,11 @@ msgstr ""
 
 #: collective/consent/views/consent_item_consents_view.pt:9
 msgid "List of user consents"
-msgstr ""
+msgstr "Liste der Einverständniserklärungen"
 
 #: collective/consent/viewlets/check_consent_viewlet.py:63
 msgid "Please read the text and give your consent below!"
-msgstr ""
+msgstr "Bitte lesen Sie den Text und bestätigen Sie mit dem Knopf unten."
 
 #: collective/consent/profiles/default/types/Consent_Item.xml
 msgid "Provides consent informations and some settings for the consent."
@@ -57,7 +57,7 @@ msgstr ""
 
 #: collective/consent/content/consent_item.py:40
 msgid "Target Roles"
-msgstr ""
+msgstr "Ziel-Rechterollen"
 
 #: collective/consent/content/consent_item.py:15
 msgid "Text"
@@ -65,15 +65,15 @@ msgstr ""
 
 #: collective/consent/content/consent_item.py:30
 msgid "The Text on the consent button, to give the consent/acknowledgement"
-msgstr ""
+msgstr "Der Text für den Bestätigungsknopf"
 
 #: collective/consent/content/consent_item.py:18
 msgid "The full text of the consent item."
-msgstr ""
+msgstr "Der Volltext der Erklärung"
 
 #: collective/consent/content/consent_item.py:61
 msgid "The time in days, after the user has to renew there consent."
-msgstr ""
+msgstr "Zeit in Tagen, nach denen die Einverständniserklärung verfällt."
 
 #: collective/consent/configure.zcml:44
 msgid "Uninstalls the collective.consent add-on."
@@ -86,7 +86,7 @@ msgstr ""
 
 #: collective/consent/content/consent_item.py:43
 msgid "Which user roles should see the message?"
-msgstr ""
+msgstr "Benutzer mit welchen Rechterollen, sollen die Erklärung bestätigen?"
 
 #: collective/consent/configure.zcml:35
 msgid "collective.consent"
@@ -102,16 +102,16 @@ msgstr ""
 
 #: collective/consent/views/consent_item_consents_view.pt:15
 msgid "email"
-msgstr ""
+msgstr "E-Mail"
 
 #: collective/consent/views/consent_item_consents_view.pt:14
 msgid "fullname"
-msgstr ""
+msgstr "Name"
 
 #: collective/consent/views/consent_item_consents_view.pt:16
 msgid "timestamp"
-msgstr ""
+msgstr "Zeitstempel"
 
 #: collective/consent/views/consent_item_consents_view.pt:17
 msgid "valid"
-msgstr ""
+msgstr "Gültig"

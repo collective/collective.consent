@@ -60,7 +60,7 @@ class CheckConsentViewlet(ViewletBase):
             came_from = context_state.current_base_url()
             log.info("No consent for {0}".format(item.getURL()))
             api.portal.show_message(
-                message=_("Please give your consent below!"), request=self.request
+                message=_("Please read the text and give your consent below!"), request=self.request
             )
             redirect_url = item.getURL() + u"?came_from=" + came_from
             return self.request.response.redirect(redirect_url)
