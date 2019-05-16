@@ -3,11 +3,12 @@
 # from collective.consent import _
 from collective.consent import log
 from collective.consent.utilities import get_consent_container
+from datetime import datetime
+from datetime import timedelta
 from plone import api
 # from Products.Five.browser import BrowserView
 from plone.dexterity.browser.view import DefaultView
-from datetime import datetime
-from datetime import timedelta
+
 
 # from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 

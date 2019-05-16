@@ -39,3 +39,7 @@ report.html
 !src/collective
 /collective.consent.sublime-project
 /collective.consent.sublime-workspace
+/coverage.xml
+/.tox
+/reports
+/.coverage.*

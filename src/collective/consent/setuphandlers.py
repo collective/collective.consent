@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
+from collective.consent import log
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
-from collective.consent import log
 
 
 @implementer(INonInstallable)
 class HiddenProfiles(object):
-
     def getNonInstallableProfiles(self):
         """Hide uninstall profile from site-creation and quickinstaller."""
         return [

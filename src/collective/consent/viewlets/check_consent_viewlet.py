@@ -3,11 +3,11 @@
 from collective.consent import log
 from collective.consent.content.consent_item import IConsentItem
 from collective.consent.utilities import get_consent_container
+from datetime import datetime
+from datetime import timedelta
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
 from zope.component import getMultiAdapter
-from datetime import datetime
-from datetime import timedelta
 
 
 class CheckConsentViewlet(ViewletBase):

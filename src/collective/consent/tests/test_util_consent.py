@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # from collective.consent.testing import COLLECTIVE_CONSENT_FUNCTIONAL_TESTING
 from collective.consent.testing import COLLECTIVE_CONSENT_INTEGRATION_TESTING
+from datetime import datetime
+from datetime import timedelta
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from datetime import datetime
-from datetime import timedelta
 
 import unittest
 
