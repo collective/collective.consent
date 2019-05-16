@@ -121,13 +121,13 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
             u'Jane Doe',
         )
         # get all consents for user_id:
-        results = self.consents.search_consents(user_id=TEST_USER_ID, )
+        results = self.consents.search_consents(user_id=TEST_USER_ID)
         results_list = [r for r in results]
         self.assertTrue(list(results_list))
         self.assertTrue(len(list(results_list)) == 2)
 
     def test_no_results_in_search_consents(self):
-        results = self.consents.search_consents(user_id=TEST_USER_ID, )
+        results = self.consents.search_consents(user_id=TEST_USER_ID)
         results_list = [r for r in results]
         self.assertTrue(len(results_list) == 0)
 
@@ -145,7 +145,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
             u'John Doe',
         )
         # get all consents for user_id:
-        results = self.consents.search_consents(user_id=TEST_USER_ID, )
+        results = self.consents.search_consents(user_id=TEST_USER_ID)
         results_list = [r for r in results]
         self.assertTrue(results_list)
         self.assertTrue(len(results_list) == 2)
@@ -155,7 +155,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
             TEST_USER_ID,
         )
         # get valid and invalid consents:
-        results = self.consents.search_consents(user_id=TEST_USER_ID, )
+        results = self.consents.search_consents(user_id=TEST_USER_ID)
         results_list = [r for r in results]
         self.assertTrue(results_list)
         self.assertTrue(len(results_list) == 2)
@@ -191,7 +191,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.assertTrue(results_list)
         self.assertTrue(len(results_list) == 2)
 
-        self.consents.make_consents_invalid(self.consent1.UID(), )
+        self.consents.make_consents_invalid(self.consent1.UID())
         # get valid and invalid consents:
         results = self.consents.search_consents(
             consent_item_uid=self.consent1.UID(),

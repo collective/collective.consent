@@ -37,7 +37,7 @@ class ConsentsContainerIntegrationTest(unittest.TestCase):
 
         self.assertTrue(
             IConsentsContainer.providedBy(obj),
-            u'IConsentsContainer not provided by {0}!'.format(obj, ),
+            u'IConsentsContainer not provided by {0}!'.format(obj),
         )
 
     def test_ct_consents_container_adding(self):
@@ -52,7 +52,7 @@ class ConsentsContainerIntegrationTest(unittest.TestCase):
 
         self.assertTrue(
             IConsentsContainer.providedBy(obj),
-            u'IConsentsContainer not provided by {0}!'.format(obj.id, ),
+            u'IConsentsContainer not provided by {0}!'.format(obj.id),
         )
 
     def test_ct_consents_container_filter_content_type_true(self):

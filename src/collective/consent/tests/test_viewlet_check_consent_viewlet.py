@@ -28,7 +28,8 @@ class ViewletIntegrationTest(unittest.TestCase):
         api.content.create(self.portal, 'Document', 'other-document')
         api.content.create(self.portal.consents, 'Consent Item', 'consent-item')
         api.content.transition(
-            obj=self.portal.consents['consent-item'], transition='publish'
+            obj=self.portal.consents['consent-item'],
+            transition='publish',
         )
 
     def get_check_consent_viewlet(self, context):
@@ -39,7 +40,7 @@ class ViewletIntegrationTest(unittest.TestCase):
             (context, self.request, view),
             IViewletManager,
             manager_name,
-            default=None
+            default=None,
         )
         manager.update()
         my_viewlet = [
@@ -55,7 +56,7 @@ class ViewletIntegrationTest(unittest.TestCase):
             (self.portal['other-document'], self.request, view),
             IViewletManager,
             manager_name,
-            default=None
+            default=None,
         )
         self.assertIsNotNone(manager)
         manager.update()

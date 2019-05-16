@@ -69,5 +69,5 @@ class ConsentItemIntegrationTest(unittest.TestCase):
         fti = queryUtility(IDexterityFTI, name='Consent Item')
         self.assertFalse(
             fti.global_allow,
-            u'{0} is globally addable!'.format(fti.id)
+            u'{0} is globally addable!'.format(fti.id),
         )

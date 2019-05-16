@@ -147,7 +147,7 @@ class ConsentsContainer(Container):
         """ Find the consents for a given consent_item_uid and
             set valid=False
         """
-        query = And(Eq('consent_item_uid', consent_item_uid), )
+        query = And(Eq('consent_item_uid', consent_item_uid))
         records = [r for r in self.consents_soup.query(query)]
         if not records:
             return
