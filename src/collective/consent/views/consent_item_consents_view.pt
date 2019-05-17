@@ -5,8 +5,19 @@
       i18n:domain="collective.consent"
       metal:use-macro="context/main_template/macros/master">
 <body>
-  <metal:block fill-slot="content-core">
+
+  <metal:block fill-slot="main">
+    <link rel="stylesheet" type="text/css"
+      href="++resource++collective.consent/main.min.css" />
+
     <h2 i18n:translate="">List of user consents</h2>
+    <metal:manage_consents tal:condition="view/edit_perm|nothing">
+    <form action="">
+      <button type="submit"
+        name="reset_consents"
+        i18n:translate="">reset all consents</button>
+    </form>
+    </metal:manage_consents>
     <table>
       <thead>
         <tr>

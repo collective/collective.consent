@@ -21,20 +21,14 @@ class ConsentItemView(DefaultView):
     def __call__(self):
         consent_button_text = self.request.form.get('consent_button_text')
         submit = 'submit' in self.request.form
-        reset = 'reset_consents' in self.request.form
         consent_uid = self.request.form.get('consent_uid')
         user_id = self.request.form.get('user_id')
         self.came_from = self.request.form.get('came_from')
         if submit:
             self.save_consent(consent_uid, user_id, consent_button_text)
-            return self.request.response.redirect(self.came_from)
-        if reset:
-            self.reset_consents(consent_uid)
+            if self.came_from:
+                return self.request.response.redirect(self.came_from)
         return super(ConsentItemView, self).__call__()
-
-    def reset_consents(self, consent_uid):
-        consent_container = get_consent_container()
-        consent_container.make_consents_invalid(consent_uid)
 
     def save_consent(self, consent_uid, user_id, submit_value):
         if user_id != self.user_info['id']:

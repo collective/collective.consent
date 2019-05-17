@@ -12,36 +12,8 @@
               tal:attributes="src string:${context/absolute_url}/@@images/image/thumb" />
     </div>
 
-    <div tal:condition="python: context.text"
-          tal:content="structure python: context.text.output" />
-
-    <span tal:condition="view/has_given_consent|nothing">Sie haben bereits zugestimmt.</span>
-
-    <form action="">
-      <input type="hidden" name="came_from" tal:attributes="value view/came_from" />
-      <input type="hidden" name="consent_uid" tal:attributes="value context/UID" />
-      <input type="hidden" name="consent_button_text" tal:attributes="value context/button_text" />
-      <input type="hidden" name="user_id" tal:attributes="value view/user_info/id" />
-      <button type="submit"
-        name="submit"
-        tal:content="context/button_text"
-        tal:attributes="formaction string:${context/absolute_url}"
-        tal:condition="not:view/has_given_consent|nothing"></button>
-      <metal:manage_consents tal:condition="view/user_info/edit_perm|nothing">
-        <button type="submit"
-          name="reset_consents"
-          name="reset">reset all consents</button>
-        <button type="submit"
-          name="consents_list"
-          tal:attributes="formaction string:${context/absolute_url}/consent-item-consents-view">manage given consents</button>
-        <button type="submit"
-          tal:attributes="formaction string:${context/absolute_url}/@@historyview"
-          name="history">show changes</button>
-      </metal:manage_consents>
-    </form>
-
     <fieldset tal:condition="view/user_info/edit_perm|nothing">
-    <legend>Metadata</legend>
+      <legend>Metadata</legend>
       <label tal:attributes="for string:form-widgets-${view/w/target_roles/__name__}"
         tal:content="structure view/w/target_roles/label"></label>
       <p tal:content="structure view/w/target_roles/render">
@@ -60,6 +32,24 @@
           button_text
       </p>
     </fieldset>
+
+    <div tal:condition="python: context.text"
+          tal:content="structure python: context.text.output" />
+
+    <span tal:condition="view/has_given_consent|nothing"
+      class="consent_has_given_msg">Sie haben bereits zugestimmt.</span>
+
+    <form action="">
+      <input type="hidden" name="came_from" tal:attributes="value view/came_from" />
+      <input type="hidden" name="consent_uid" tal:attributes="value context/UID" />
+      <input type="hidden" name="consent_button_text" tal:attributes="value context/button_text" />
+      <input type="hidden" name="user_id" tal:attributes="value view/user_info/id" />
+      <button type="submit"
+        name="submit"
+        tal:content="context/button_text"
+        tal:attributes="formaction string:${context/absolute_url}"
+        tal:condition="not:view/has_given_consent|nothing"></button>
+    </form>
   </metal:content-core>
 <body>
 </html>

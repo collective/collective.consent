@@ -24,6 +24,7 @@ def create_consents_container(context):
         portal,
         'consents',
         title='Consents',
+        exclude_from_nav=True,
     )
     consents_container = portal[consents_id]
     consents_container.reindexObject()

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-05-16 14:10+0000\n"
+"POT-Creation-Date: 2019-05-16 14:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,6 +109,10 @@ msgstr ""
 
 #: collective/consent/views/consent_item_consents_view.pt:14
 msgid "fullname"
+msgstr ""
+
+#: collective/consent/views/consent_item_view.pt:31
+msgid "reset all consents"
 msgstr ""
 
 #: collective/consent/views/consent_item_consents_view.pt:16

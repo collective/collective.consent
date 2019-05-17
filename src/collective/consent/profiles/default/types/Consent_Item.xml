@@ -93,5 +93,14 @@
       visible="True">
     <permission value="Modify portal content"/>
   </action>
-
+  <action
+      action_id="manage_consents"
+      category="object"
+      condition_expr=""
+      i18n:attributes="title"
+      title="Manage given consents"
+      url_expr="string:${object_url}/consent-item-consents-view"
+      visible="True">
+    <permission value="Modify portal content"/>
+  </action>
 </object>

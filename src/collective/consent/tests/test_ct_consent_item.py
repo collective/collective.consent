@@ -56,13 +56,15 @@ class ConsentItemIntegrationTest(unittest.TestCase):
             type='Consent Item',
             id='consent_item',
         )
-
         self.assertTrue(
             IConsentItem.providedBy(obj),
             u'IConsentItem not provided by {0}!'.format(
                 obj.id,
             ),
         )
+        # check that deleting the object works too
+        api.content.delete(obj=obj)
+        self.assertFalse('consent_item' in self.parent.objectIds())
 
     def test_ct_consent_item_globally_not_addable(self):
         setRoles(self.portal, TEST_USER_ID, ['Contributor'])
