@@ -5,7 +5,20 @@ Changelog
 1.0b2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- add plone.app.contenttypes as dependency
+  [MrTango]
+
+- sync travis config with tox config
+  [MrTango]
+
+- remove plone.app.contenttypes dependency and define RichText field our self.
+  [MrTango]
+
+- Add some german translations
+  [MrTango]
+
+- Fix i18n domain, add styles, refacture views, exclude consents container from nav
+  [MrTango]
 
 
 1.0b1 (2019-05-16)
