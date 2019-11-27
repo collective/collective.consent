@@ -4,6 +4,13 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="collective.consent"
       metal:use-macro="context/main_template/macros/master">
+
+<metal:style_slot fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css"
+      href="++resource++collective.consent/main.min.css" />
+</metal:style_slot>
+
+
 <body>
   <metal:content-core fill-slot="content-core">
 
@@ -36,20 +43,23 @@
     <div tal:condition="python: context.text"
           tal:content="structure python: context.text.output" />
 
-    <span tal:condition="view/has_given_consent|nothing"
-      class="consent_has_given_msg">Sie haben bereits zugestimmt.</span>
+    <fieldset>
+      <legend i18n:translate="consent_item_action_legend">Action</legend>
+      <span tal:condition="view/has_given_consent|nothing"
+        class="consent_has_given_msg">Sie haben bereits zugestimmt.</span>
 
-    <form action="">
-      <input type="hidden" name="came_from" tal:attributes="value view/came_from" />
-      <input type="hidden" name="consent_uid" tal:attributes="value context/UID" />
-      <input type="hidden" name="consent_button_text" tal:attributes="value context/button_text" />
-      <input type="hidden" name="user_id" tal:attributes="value view/user_info/id" />
-      <button type="submit"
-        name="submit"
-        tal:content="context/button_text"
-        tal:attributes="formaction string:${context/absolute_url}"
-        tal:condition="not:view/has_given_consent|nothing"></button>
-    </form>
+      <form action="">
+        <input type="hidden" name="came_from" tal:attributes="value view/came_from" />
+        <input type="hidden" name="consent_uid" tal:attributes="value context/UID" />
+        <input type="hidden" name="consent_button_text" tal:attributes="value context/button_text" />
+        <input type="hidden" name="user_id" tal:attributes="value view/user_info/id" />
+        <button type="submit"
+          name="submit"
+          tal:content="context/button_text"
+          tal:attributes="formaction string:${context/absolute_url}"
+          tal:condition="not:view/has_given_consent|nothing"></button>
+      </form>
+    </fieldset>
   </metal:content-core>
 <body>
 </html>

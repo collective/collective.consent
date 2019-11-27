@@ -1,4 +1,5 @@
 // out: main.min.css, compress: true, sourceMap: true
+// requires vscode ext: mrcrowl.easy-less
 
 .template-consent-item-consents-view{
     button[name=reset_consents] {
@@ -14,6 +15,20 @@
         td,th {
             padding: 1em;
             border: 1px solid #999;
+        }
+    }
+    .consent-message-wrapper {
+        border: 1px solid #eee;
+        padding: 1em;
+        margin: 1em;
+    }
+
+}
+
+.template-view.portaltype-consent-item {
+    fieldset{
+        legend {
+            margin-bottom: 0.5em;
         }
     }
 }

@@ -1,0 +1,54 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2019-11-20 17:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#: collective/consent/content/consent_item.py:27
+msgid "Button Text"
+msgstr ""
+
+#: collective/consent/content/consent_item.py:58
+msgid "Consent Update Period"
+msgstr ""
+
+#: collective/consent/viewlets/check_consent_viewlet.py:63
+msgid "Please read the text and give your consent below!"
+msgstr ""
+
+#: collective/consent/content/consent_item.py:40
+msgid "Target Roles"
+msgstr ""
+
+#: collective/consent/content/consent_item.py:15
+msgid "Text"
+msgstr ""
+
+#: collective/consent/content/consent_item.py:30
+msgid "The Text on the consent button, to give the consent/acknowledgement"
+msgstr ""
+
+#: collective/consent/content/consent_item.py:18
+msgid "The full text of the consent item."
+msgstr ""
+
+#: collective/consent/content/consent_item.py:61
+msgid "The time in days, after the user has to renew there consent."
+msgstr ""
+
+#: collective/consent/content/consent_item.py:43
+msgid "Which user roles should see the message?"
+msgstr ""

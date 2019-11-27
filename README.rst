@@ -29,6 +29,8 @@ ToDo
 
 - Add a global list of consents, sorted per user (maybe)
 - remove Anonymous from roles vocab, as we only support authenticated users
+- allow users to remove there consent?
+- list given consents on the user dashboard (action: my consents)
 
 
 Installation

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-05-16 14:51+0000\n"
+"POT-Creation-Date: 2019-11-20 17:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,12 @@ msgstr ""
 msgid "Installs the collective.consent add-on."
 msgstr ""
 
-#: collective/consent/views/consent_item_consents_view.pt:9
+#: collective/consent/views/consent_item_consents_view.pt:13
 msgid "List of user consents"
+msgstr ""
+
+#: collective/consent/profiles/default/types/Consent_Item.xml
+msgid "Manage given consents"
 msgstr ""
 
 #: collective/consent/viewlets/check_consent_viewlet.py:63
@@ -96,22 +100,31 @@ msgstr ""
 msgid "collective.consent (uninstall)"
 msgstr ""
 
-#: collective/consent/views/consent_item_consents_view.pt:13
+#: collective/consent/views/consent_item_consents_view.pt:24
 msgid "consent id"
 msgstr ""
 
-#: collective/consent/views/consent_item_consents_view.pt:15
+#. Default: "Action"
+#: collective/consent/views/consent_item_view.pt:47
+msgid "consent_item_action_legend"
+msgstr ""
+
+#: collective/consent/views/consent_item_consents_view.pt:26
 msgid "email"
 msgstr ""
 
-#: collective/consent/views/consent_item_consents_view.pt:14
+#: collective/consent/views/consent_item_consents_view.pt:25
 msgid "fullname"
 msgstr ""
 
 #: collective/consent/views/consent_item_consents_view.pt:16
+msgid "reset all consents"
+msgstr ""
+
+#: collective/consent/views/consent_item_consents_view.pt:27
 msgid "timestamp"
 msgstr ""
 
-#: collective/consent/views/consent_item_consents_view.pt:17
+#: collective/consent/views/consent_item_consents_view.pt:28
 msgid "valid"
 msgstr ""
