@@ -3,10 +3,8 @@ language: python
 sudo: false
 addons:
   apt:
-    sources:
-      - google-chrome
     packages:
-      - google-chrome-stable
+      - firefox-geckodriver
 cache:
   pip: true
   directories:
