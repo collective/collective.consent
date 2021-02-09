@@ -11,7 +11,7 @@
      for="collective.consent.content.consent_item.IConsentItem"
      class=".consent_item_consents_view.ConsentItemConsentsView"
      template="consent_item_consents_view.pt"
-     permission="zope2.View"
+     permission="cmf.ModifyPortalContent"
      />
 
   <browser:page

@@ -5,7 +5,9 @@ Changelog
 1.0b3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix permission on consent_item_consents view
+  [MrTango]
+
 
 
 1.0b2 (2019-11-19)
