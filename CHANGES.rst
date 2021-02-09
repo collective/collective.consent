@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0b3 (unreleased)
+1.0b3 (2021-02-09)
 ------------------
 
 - Fix permission on consent_item_consents view
