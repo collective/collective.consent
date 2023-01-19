@@ -43,6 +43,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
+    python_requires=">=3.7",
     install_requires=[
         # -*- Extra requirements: -*-
         "plone.app.dexterity",
