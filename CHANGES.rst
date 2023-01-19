@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-1.0b4 (unreleased)
+2.0b1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 6 compatibility
+  [MrTango]
 
 
 1.0b3 (2021-02-09)

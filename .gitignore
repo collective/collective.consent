@@ -43,3 +43,5 @@ report.html
 /.tox
 /reports
 /.coverage.*
+/.python-version
+/venv
