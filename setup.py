@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="collective.consent",
-    version="2.0b1.dev0",
+    version="2.0b1",
     description="Provides a functionality to ask users for consent to different topics.",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
