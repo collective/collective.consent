@@ -17,59 +17,59 @@ class ConsentItemIntegrationTest(unittest.TestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         portal_types = self.portal.portal_types
         parent_id = portal_types.constructContent(
-            'Consents Container',
+            "Consents Container",
             self.portal,
-            'consents_container',
-            title='Parent container',
+            "consents_container",
+            title="Parent container",
         )
         self.parent = self.portal[parent_id]
 
     def test_ct_consent_item_schema(self):
-        fti = queryUtility(IDexterityFTI, name='Consent Item')
+        fti = queryUtility(IDexterityFTI, name="Consent Item")
         schema = fti.lookupSchema()
         self.assertEqual(IConsentItem, schema)
 
     def test_ct_consent_item_fti(self):
-        fti = queryUtility(IDexterityFTI, name='Consent Item')
+        fti = queryUtility(IDexterityFTI, name="Consent Item")
         self.assertTrue(fti)
 
     def test_ct_consent_item_factory(self):
-        fti = queryUtility(IDexterityFTI, name='Consent Item')
+        fti = queryUtility(IDexterityFTI, name="Consent Item")
         factory = fti.factory
         obj = createObject(factory)
 
         self.assertTrue(
             IConsentItem.providedBy(obj),
-            u'IConsentItem not provided by {0}!'.format(
+            "IConsentItem not provided by {0}!".format(
                 obj,
             ),
         )
 
     def test_ct_consent_item_adding(self):
-        setRoles(self.portal, TEST_USER_ID, ['Contributor'])
+        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
         obj = api.content.create(
             container=self.parent,
-            type='Consent Item',
-            id='consent_item',
+            type="Consent Item",
+            id="consent_item",
         )
         self.assertTrue(
             IConsentItem.providedBy(obj),
-            u'IConsentItem not provided by {0}!'.format(
+            "IConsentItem not provided by {0}!".format(
                 obj.id,
             ),
         )
         # check that deleting the object works too
         api.content.delete(obj=obj)
-        self.assertFalse('consent_item' in self.parent.objectIds())
+        self.assertFalse("consent_item" in self.parent.objectIds())
 
     def test_ct_consent_item_globally_not_addable(self):
-        setRoles(self.portal, TEST_USER_ID, ['Contributor'])
-        fti = queryUtility(IDexterityFTI, name='Consent Item')
+        setRoles(self.portal, TEST_USER_ID, ["Contributor"])
+        fti = queryUtility(IDexterityFTI, name="Consent Item")
         self.assertFalse(
             fti.global_allow,
-            u'{0} is globally addable!'.format(fti.id),
+            "{0} is globally addable!".format(fti.id),
         )

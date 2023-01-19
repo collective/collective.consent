@@ -27,6 +27,7 @@ Features
 ToDo
 ----
 
+- Support local roles, currently only if the user has global roles that match, she will see the consent note.
 - Add a global list of consents, sorted per user (maybe)
 - remove Anonymous from roles vocab, as we only support authenticated users
 - allow users to remove there consent?

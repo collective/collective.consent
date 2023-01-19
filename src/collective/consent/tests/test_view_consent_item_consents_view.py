@@ -3,9 +3,10 @@ from collective.consent.testing import COLLECTIVE_CONSENT_FUNCTIONAL_TESTING
 from collective.consent.testing import COLLECTIVE_CONSENT_INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID, TEST_USER_NAME
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from zope.component import getMultiAdapter
-from zope.component.interfaces import ComponentLookupError
+from zope.interface.interfaces import ComponentLookupError
 
 import unittest
 

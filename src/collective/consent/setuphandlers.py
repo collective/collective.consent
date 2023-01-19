@@ -10,27 +10,27 @@ class HiddenProfiles(object):
     def getNonInstallableProfiles(self):
         """Hide uninstall profile from site-creation and quickinstaller."""
         return [
-            'collective.consent:uninstall',
+            "collective.consent:uninstall",
         ]
 
 
 def create_consents_container(context):
     portal = api.portal.get()
     portal_types = portal.portal_types
-    if 'consents' in portal.objectIds():
+    if "consents" in portal.objectIds():
         return
     consents_id = portal_types.constructContent(
-        'Consents Container',
+        "Consents Container",
         portal,
-        'consents',
-        title='Consents',
+        "consents",
+        title="Consents",
         exclude_from_nav=True,
     )
     consents_container = portal[consents_id]
     consents_container.reindexObject()
-    api.content.transition(obj=consents_container, transition='publish')
+    api.content.transition(obj=consents_container, transition="publish")
     consents_url = consents_container.absolute_url()
-    log.info('Created Consents Containter at: {0}'.format(consents_url))
+    log.info("Created Consents Containter at: {0}".format(consents_url))
 
 
 def post_install(context):

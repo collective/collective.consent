@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from collective.consent.utilities import get_consent_container
+from plone import api
+
 # from collective.consent import _
 from Products.Five.browser import BrowserView
-from plone import api
 
 
 class ConsentItemConsentsView(BrowserView):
-
     def __call__(self):
-        reset = 'reset_consents' in self.request.form
+        reset = "reset_consents" in self.request.form
         self.consents = self.get_consents()
         if reset:
             self.reset_consents(self.context.UID())
@@ -30,6 +30,6 @@ class ConsentItemConsentsView(BrowserView):
     @property
     def edit_perm(self):
         return api.user.has_permission(
-            'Modify portal content',
+            "Modify portal content",
             obj=self.context,
         )

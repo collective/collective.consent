@@ -8,4 +8,4 @@ import logging
 log = logging.getLogger("collective.consent")
 
 
-_ = MessageFactory('collective.consent')
+_ = MessageFactory("collective.consent")
