@@ -9,7 +9,7 @@ def delete_consents(obj, event):
         return
     consents.delete_consents(obj.UID())
     log.info(
-        'Deleted saved consents for {0} on ObjectRemovedEvent'.format(
+        "Deleted saved consents for {0} on ObjectRemovedEvent".format(
             obj.absolute_url_path(),
         ),
     )

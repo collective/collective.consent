@@ -21,7 +21,7 @@ class CollectiveConsentLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.consent)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'collective.consent:default')
+        applyProfile(portal, "collective.consent:default")
 
 
 COLLECTIVE_CONSENT_FIXTURE = CollectiveConsentLayer()
@@ -29,13 +29,13 @@ COLLECTIVE_CONSENT_FIXTURE = CollectiveConsentLayer()
 
 COLLECTIVE_CONSENT_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_CONSENT_FIXTURE,),
-    name='CollectiveConsentLayer:IntegrationTesting',
+    name="CollectiveConsentLayer:IntegrationTesting",
 )
 
 
 COLLECTIVE_CONSENT_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_CONSENT_FIXTURE,),
-    name='CollectiveConsentLayer:FunctionalTesting',
+    name="CollectiveConsentLayer:FunctionalTesting",
 )
 
 
@@ -45,5 +45,5 @@ COLLECTIVE_CONSENT_ACCEPTANCE_TESTING = FunctionalTesting(
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
         z2.ZSERVER_FIXTURE,
     ),
-    name='CollectiveConsentLayer:AcceptanceTesting',
+    name="CollectiveConsentLayer:AcceptanceTesting",
 )

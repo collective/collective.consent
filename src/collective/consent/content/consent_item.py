@@ -1,65 +1,66 @@
 # -*- coding: utf-8 -*-
 from collective.consent import _
+from plone.app import textfield
 from plone.dexterity.content import Item
 from plone.supermodel import model
 from zope import schema
 from zope.interface import implementer
-from plone.app import textfield
 
 
 class IConsentItem(model.Schema):
-    """ Marker interface and Dexterity Python Schema for ConsentItem
-    """
+    """Marker interface and Dexterity Python Schema for ConsentItem"""
+
     # Make sure to import: plone.app.textfield
     text = textfield.RichText(
         title=_(
-            u'Text',
+            "Text",
         ),
         description=_(
-            u'The full text of the consent item.',
+            "The full text of the consent item.",
         ),
-        default=u'',
+        default="",
         required=False,
         readonly=False,
     )
 
     button_text = schema.TextLine(
         title=_(
-            u'Button Text',
+            "Button Text",
         ),
         description=_(
-            u'The Text on the consent button, '
-            u'to give the consent/acknowledgement',
+            "The Text on the consent button, " "to give the consent/acknowledgement",
         ),
         required=True,
-        default=u'I give my consent',
+        default="I give my consent",
         readonly=False,
     )
 
     target_roles = schema.Set(
         title=_(
-            u'Target Roles',
+            "Target Roles",
         ),
         description=_(
-            u'Which user roles should see the message?',
+            "Which user roles should see the message?",
         ),
         value_type=schema.Choice(
-            vocabulary=u'plone.app.vocabularies.Roles',
+            vocabulary="plone.app.vocabularies.Roles",
         ),
-        default=set([
-            'Editor',
-            'Contributor',
-        ]),
+        default=set(
+            [
+                "Editor",
+                "Contributor",
+            ]
+        ),
         required=True,
         readonly=False,
     )
 
     consent_update_period = schema.Int(
         title=_(
-            u'Consent Update Period',
+            "Consent Update Period",
         ),
         description=_(
-            u'The time in days, after the user has to renew there consent.',
+            "The time in days, after the user has to renew there consent.",
         ),
         required=False,
         default=0,
@@ -69,5 +70,4 @@ class IConsentItem(model.Schema):
 
 @implementer(IConsentItem)
 class ConsentItem(Item):
-    """
-    """
+    """ """

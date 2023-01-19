@@ -15,34 +15,34 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
     layer = COLLECTIVE_CONSENT_INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        self.app = self.layer['app']
+        self.portal = self.layer["portal"]
+        self.app = self.layer["app"]
         self.request = self.app.REQUEST
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         self.consents = self.portal.consents
         self.consent1 = api.content.create(
             container=self.consents,
-            type='Consent Item',
-            id='consent1',
+            type="Consent Item",
+            id="consent1",
         )
         self.consent2 = api.content.create(
             container=self.consents,
-            type='Consent Item',
-            id='consent2',
+            type="Consent Item",
+            id="consent2",
         )
 
     def test_get_consent(self):
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         self.consents.save_consent(
             self.consent1.UID(),
-            TEST_USER_ID + 'b',
-            u'john@example.com',
-            u'John Doe b',
+            TEST_USER_ID + "b",
+            "john@example.com",
+            "John Doe b",
             valid=False,
         )
         record1 = self.consents.get_consent(
@@ -51,14 +51,14 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         )
         self.assertTrue(record1)
         self.assertEqual(
-            record1['user_id'],
+            record1["user_id"],
             TEST_USER_ID,
         )
 
         # make sur we dont't get an invalid record
         record2 = self.consents.get_consent(
             self.consent1.UID(),
-            TEST_USER_ID + 'b',
+            TEST_USER_ID + "b",
             valid_only=True,
         )
         self.assertFalse(record2)
@@ -74,8 +74,8 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         record = self.consents.get_consent(
             self.consent1.UID(),
@@ -83,17 +83,17 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         )
         self.assertTrue(record)
         self.assertEqual(
-            record['user_id'],
+            record["user_id"],
             TEST_USER_ID,
         )
-        self.assertTrue(record['valid'])
+        self.assertTrue(record["valid"])
 
         # make sure that old records of the same consent/user are removed:
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         results = self.consents.search_consents(
             consent_item_uid=self.consent1.UID(),
@@ -105,20 +105,20 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         self.consents.save_consent(
             self.consent2.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         self.consents.save_consent(
             self.consent2.UID(),
-            TEST_USER_ID + '_2',
-            u'jane@example.com',
-            u'Jane Doe',
+            TEST_USER_ID + "_2",
+            "jane@example.com",
+            "Jane Doe",
         )
         # get all consents for user_id:
         results = self.consents.search_consents(user_id=TEST_USER_ID)
@@ -135,14 +135,14 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         self.consents.save_consent(
             self.consent2.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         # get all consents for user_id:
         results = self.consents.search_consents(user_id=TEST_USER_ID)
@@ -168,20 +168,20 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         results_list = [r for r in results]
         self.assertTrue(results_list)
         self.assertTrue(len(results_list) == 1)
-        self.assertTrue(results_list[0]['valid'])
+        self.assertTrue(results_list[0]["valid"])
 
     def test_make_consents_invalid(self):
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         self.consents.save_consent(
             self.consent1.UID(),
-            TEST_USER_ID + '_b',
-            u'john@example.com',
-            u'John Doe',
+            TEST_USER_ID + "_b",
+            "john@example.com",
+            "John Doe",
         )
         # get all consents for user_id:
         results = self.consents.search_consents(
@@ -213,20 +213,20 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         self.consents.save_consent(
             self.consent1.UID(),
-            TEST_USER_ID + '_1',
-            u'jane@example.com',
-            u'Jane Doe',
+            TEST_USER_ID + "_1",
+            "jane@example.com",
+            "Jane Doe",
         )
         self.consents.save_consent(
             self.consent2.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
         )
         # get a consents for a consent item by consent_item_uid:
         results = self.consents.search_consents(
@@ -259,16 +259,16 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         self.consents.save_consent(
             self.consent1.UID(),
             TEST_USER_ID,
-            u'john@example.com',
-            u'John Doe',
+            "john@example.com",
+            "John Doe",
             timestamp=datetime(past1.year, past1.month, past1.day),
         )
         past2 = today + timedelta(-90)
         self.consents.save_consent(
             self.consent2.UID(),
             TEST_USER_ID,
-            u'jane@example.com',
-            u'Jane Doe',
+            "jane@example.com",
+            "Jane Doe",
             timestamp=datetime(past2.year, past2.month, past2.day),
         )
         # get all consents for user_id / consent_item_uid:
@@ -298,6 +298,7 @@ class ConsentUtilIntegrationTest(unittest.TestCase):
         results_list = [r for r in results]
         self.assertTrue(list(results_list))
         self.assertTrue(len(list(results_list)) == 1)
+
 
 #
 # class ConsentUtilFunctionalTest(unittest.TestCase):
