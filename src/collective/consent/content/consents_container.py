@@ -118,7 +118,7 @@ class ConsentsContainer(Container):
             expires=expires,
         )
         try:
-            record = records.next()
+            record = next(records)
         except StopIteration:
             pass
         return record

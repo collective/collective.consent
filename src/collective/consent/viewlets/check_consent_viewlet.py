@@ -14,6 +14,10 @@ class CheckConsentViewlet(ViewletBase):
     """
     """
 
+    @property
+    def user(self):
+        return api.user.get_current()
+
     def check_has_given_consents(self, items):
         if IConsentItem.providedBy(self.context):
             # Skip checks for ConsentItem it self ;)
@@ -22,15 +26,14 @@ class CheckConsentViewlet(ViewletBase):
         consent_container = get_consent_container()
         if not consent_container:
             return True, None
-        user = api.user.get_current()
-        user_id = user.id
+        user_id = self.user.id
         for item in items:
             item_obj = item.getObject()
             expires = None
             if item_obj.consent_update_period:
                 expires = datetime.now() - timedelta(item_obj.consent_update_period)
             if not len(item_obj.target_roles & set(user_roles)):
-                log.info(u"target_roles doesn't match: {0}.".format(user_roles))
+                log.info(f"target_roles [${item_obj.target_roles}] doesn't match [${user_roles}].")
                 return True, None
             record = consent_container.get_consent(
                 item.UID, user_id, valid_only=True, expires=expires
@@ -58,7 +61,7 @@ class CheckConsentViewlet(ViewletBase):
                 (self.context, self.request), name="plone_context_state"
             )
             came_from = context_state.current_base_url()
-            log.info("No consent for {0}".format(item.getURL()))
+            log.info(f"User ${self.user.id} has, not given consent for ${item.getURL()}")
             api.portal.show_message(
                 message=_("Please read the text and give your consent below!"), request=self.request
             )
